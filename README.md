@@ -1,145 +1,206 @@
-# Exactspace Technologies - React Assignments
+# Exactspace Technologies – React Assignments
 
-This repository contains the completed **Photo Gallery Assignment** for Exactspace Technologies.
-
----
-
-## 📸 Photo Gallery Overview
-
-The Photo Gallery is a high-performance single-page React application that renders an infinite-scrolling feed of photographs fetched from the Picsum API. Each photo displays its high-resolution image (`download_url`), author attribution, and an interactive Font Awesome thumbs-up button with an individual click counter. The interface is pixel-accurate to the reference design provided in the assignment and fully responsive across mobile, tablet, and desktop devices.
-
-### ✨ Implemented Features
-
-1. **Picsum API Integration**:
-   - Fetches paginated photos starting from `https://picsum.photos/v2/list?page=1`, continuing sequentially with `page=2`, `page=3`, etc.
-   - Smooth asynchronous data fetching with fetch guards to prevent duplicate concurrent requests.
-
-2. **Infinite Scroll**:
-   - Modern `IntersectionObserver` sentinel placed at the bottom of the feed with prefetch margin.
-   - Automatically detects when the user approaches the bottom of the page and fetches the next page seamlessly.
-   - Gracefully stops fetching when no more photos are available (`hasMore = false`).
-
-3. **Photo Display & Author Info**:
-   - Displays each photo using its `download_url`.
-   - Uses lazy loading (`loading="lazy"`) and shimmer skeleton placeholders to optimize performance and prevent layout shift.
-   - Clearly displays photo author attribution matching the reference design: `Author: <author name>`.
-
-4. **Font Awesome Thumbs-Up Button & Likes Counter**:
-   - Uses the official `@fortawesome/react-fontawesome` and `@fortawesome/free-solid-svg-icons`.
-   - Each photo starts with a like count of `0`.
-   - Clicking the thumbs-up button increments the count by `1` per click for that specific photo.
-   - Features micro-interaction bounce animation and keyboard accessibility (`aria-label`).
-
-5. **Reference Design & Responsive Layout**:
-   - Styled closely to `photo-gallery.png` and `photo-gallery.jpg`.
-   - Desktop: Left-aligned single-column photo list with right-aligned header title "Photo gallery".
-   - Mobile/Tablet: Fluid single-column responsive layout with touch-friendly spacing and image adaptation.
-
-6. **Deduplication & Robust Error Handling**:
-   - Photo IDs are checked and deduplicated before updating state.
-   - Displays clear loading indicators while fetching initial and subsequent batches.
-   - Catches network or API failures, displays user-friendly error banners, and provides an immediate **"Retry loading"** button.
+This repository includes the finished **Photo Gallery Assignment** developed as part of the React assignment for Exactspace Technologies.
 
 ---
 
-## 📂 Project Structure
+## Photo Gallery – Project Overview
 
-```
+The Photo Gallery is a responsive React-based web application that loads and displays photographs from the Picsum API in an automatically updating feed. Users can browse images, view the corresponding author's name, and interact with a thumbs-up button to track likes for individual photographs.
+
+The application is designed as a single-page interface with infinite scrolling, optimized image loading, and a layout that adapts to different screen sizes. Considerable attention has been given to matching the reference screenshots supplied with the assignment.
+
+### Features and Implementation
+
+**1. Integration with Picsum API**
+
+- Retrieves photo information from the Picsum public API, beginning with `https://picsum.photos/v2/list?page=1`.
+- Loads additional records by incrementing the page number (`page=2`, `page=3`, and so on).
+- Uses asynchronous requests to retrieve data without blocking the interface.
+- Includes request-handling mechanisms to avoid multiple simultaneous fetch operations.
+
+**2. Automatic Infinite Scrolling**
+
+- Implements the browser's `IntersectionObserver` API to monitor a designated element at the bottom of the gallery.
+- Starts loading the next set of photographs when the user scrolls close to the end of the currently displayed content.
+- Uses a prefetch margin to initiate requests before the user reaches the actual bottom.
+- Prevents unnecessary API requests after the available photo data has been exhausted by maintaining a `hasMore` state.
+
+**3. Image Rendering and Author Details**
+
+- Fetches and renders photographs using the `download_url` received from the API.
+- Applies native lazy loading to images through `loading="lazy"` to improve page performance.
+- Displays shimmer-style skeleton placeholders while images are being loaded.
+- Shows the photographer's name below each image using the format `Author: <author name>`.
+
+**4. Like Functionality and Font Awesome Integration**
+
+- Integrates Font Awesome through `@fortawesome/react-fontawesome` and `@fortawesome/free-solid-svg-icons`.
+- Provides a thumbs-up button for every photograph.
+- Initializes the like counter of each photo to `0`.
+- Updates the corresponding counter by one whenever its button is clicked.
+- Maintains separate like counts so that interacting with one photograph does not affect another.
+- Adds a small bounce animation to improve the interaction experience.
+- Supports keyboard interaction and accessible button descriptions through `aria-label`.
+
+**5. Responsive UI and Reference Matching**
+
+- Recreates the overall appearance of the supplied `photo-gallery.png` and `photo-gallery.jpg` reference images.
+- On desktop screens, photographs are arranged in a single-column layout, with the heading "Photo gallery" positioned towards the right side of the header.
+- On smaller screens, the layout adjusts automatically to maintain proper image sizing and spacing.
+- Includes responsive styling for desktop, tablet, and mobile devices.
+- Maintains comfortable spacing and touch-friendly controls on mobile screens.
+
+**6. Error Management and Duplicate Prevention**
+
+- Uses photo IDs to identify and filter out duplicate entries before adding new data to the gallery.
+- Displays loading feedback during both the initial API request and subsequent pagination requests.
+- Handles API failures and network connectivity issues without breaking the application.
+- Shows a readable error message whenever a request fails.
+- Provides a **"Retry loading"** option that allows users to attempt the failed request again.
+
+---
+
+## Project Directory Structure
+
+```text
 react-assignments-main/
-├── README.md                           # Main documentation & run guide
-├── package.json                        # Root workspace scripts (convenience)
-├── .gitignore                          # Git ignore rules
-├── chat-app/                           # Chat app assignment instructions & assets
+├── README.md                           # Repository documentation
+├── package.json                        # Root-level scripts and configuration
+├── .gitignore                          # Files excluded from Git
+├── chat-app/                           # Chat application assignment resources
 │   ├── assets/
 │   ├── reactjs_chat_assignment.md
 │   └── team-chat-intro.gif
-└── photo-gallery/                      # Completed React Photo Gallery project
-    ├── README.md                       # Sub-project specific documentation
-    ├── package.json                    # Dependencies & scripts
-    ├── vite.config.js                  # Vite configuration & Vitest setup
-    ├── index.html                      # HTML entry template
-    ├── photo-gallery.jpg               # Reference design mockup (JPEG)
-    ├── photo-gallery.png               # Reference design mockup (PNG)
-    ├── reactjs_photo_gallery_assignment.md # Original assignment specification
+└── photo-gallery/                      # Implemented photo gallery application
+    ├── README.md                       # Photo gallery documentation
+    ├── package.json                    # Project dependencies and scripts
+    ├── vite.config.js                  # Vite and Vitest configuration
+    ├── index.html                      # Application HTML template
+    ├── photo-gallery.jpg               # Reference screenshot (JPEG)
+    ├── photo-gallery.png               # Reference screenshot (PNG)
+    ├── reactjs_photo_gallery_assignment.md
     └── src/
-        ├── main.jsx                    # React entry point
-        ├── App.jsx                     # Layout shell with header and gallery
-        ├── index.css                   # Comprehensive styles & media queries
+        ├── main.jsx                    # React application entry point
+        ├── App.jsx                     # Main application layout
+        ├── index.css                   # Global styling and responsive rules
         ├── components/
-        │   ├── PhotoGallery.jsx        # Gallery container, API & scroll logic
-        │   └── PhotoCard.jsx           # Individual photo card with like button
+        │   ├── PhotoGallery.jsx        # API integration and scrolling logic
+        │   └── PhotoCard.jsx           # Photo component with like functionality
         └── test/
-            ├── setup.js                # Test setup & IntersectionObserver mock
-            ├── PhotoCard.test.jsx      # Component unit tests
-            ├── PhotoGallery.test.jsx   # Integration tests (infinite scroll, deduplication, retry)
-            └── serverProbe.js          # Vite server verification probe
+            ├── setup.js                # Test environment configuration
+            ├── PhotoCard.test.jsx      # Tests for individual photo cards
+            ├── PhotoGallery.test.jsx   # Gallery integration and behavior tests
+            └── serverProbe.js          # Development server verification
 ```
 
 ---
 
-## 🚀 Quick Start & Installation
+## Installation and Execution Guide
 
-### Prerequisites
-- **Node.js**: v18.0.0 or later (Tested on Node v22.17.1)
-- **npm**: v9.0.0 or later (Tested on npm 10.9.2)
+### Requirements
 
-### Option 1: Running from `photo-gallery` directory (Recommended)
+Before running the application, ensure the following software is available:
+
+- **Node.js:** Version 18.0.0 or above (tested with Node v22.17.1).
+- **npm:** Version 9.0.0 or above (tested with npm 10.9.2).
+
+### Method 1: Start the application from its project folder
+
+This is the preferred approach.
 
 ```bash
-# 1. Navigate to the photo-gallery directory
+# Step 1: Open the photo-gallery directory
 cd photo-gallery
 
-# 2. Install dependencies
+# Step 2: Download and install the required packages
 npm install
 
-# 3. Start the development server
+# Step 3: Launch the Vite development server
 npm run dev
-# (or npm start)
+
+# Alternatively
+npm start
 ```
 
-The application will be live at: **`http://localhost:3000`** (or the port indicated in your terminal).
+After the server starts, open the URL displayed in the terminal. The default configured address is:
 
-### Option 2: Running from repository root
+`http://localhost:3000`
+
+### Method 2: Run commands from the repository root
+
+You can also install dependencies and launch the project without manually entering the subdirectory.
 
 ```bash
-# 1. Install dependencies in photo-gallery
+# Install dependencies for the photo gallery
 npm --prefix photo-gallery install
 
-# 2. Start the dev server
+# Start the development server
 npm run dev
-# (or npm start)
+
+# Alternatively
+npm start
 ```
 
 ---
 
-## 🧪 Running Tests & Build Verification
+## Testing and Production Build
 
-### Run Automated Tests (Vitest & React Testing Library)
+### 1. Execute Automated Tests
+
+The application uses Vitest along with React Testing Library to validate component behavior and application functionality.
+
+Run the following commands:
+
 ```bash
 cd photo-gallery
 npm test
 ```
-*Executes all unit and integration tests verifying initial fetch, infinite scrolling, deduplication, like counters, and error retry.*
 
-### Production Build
+The test suite covers:
+
+- Initial photo retrieval from the API.
+- Loading additional photographs through infinite scrolling.
+- Filtering duplicate photo entries.
+- Individual like counter functionality.
+- Handling failed requests and retry operations.
+- Component-level rendering and interactions.
+
+### 2. Generate a Production Build
+
+To create an optimized version of the application for deployment, execute:
+
 ```bash
 cd photo-gallery
 npm run build
 ```
-*Builds optimized static assets into `photo-gallery/dist`.*
 
-### Preview Production Build
+The generated production files will be available inside:
+
+`photo-gallery/dist`
+
+### 3. Run the Production Preview
+
+To locally inspect the generated production build, use:
+
 ```bash
 cd photo-gallery
 npm run preview
 ```
 
+This launches a local preview server so that the production output can be checked before deployment.
+
 ---
 
-## 🛠️ Tech Stack & Key Decisions
+## Technologies Used and Implementation Choices
 
-- **React 18**: Modern component architecture using functional components and hooks (`useState`, `useEffect`, `useCallback`, `useRef`).
-- **Vite 5**: Ultra-fast bundler and dev server compliant with modern Node versions (Node 18 - 22+).
-- **Font Awesome**: `@fortawesome/react-fontawesome` and `@fortawesome/free-solid-svg-icons` for the official thumbs-up icon.
-- **IntersectionObserver**: Native browser API for performant, frictionless infinite scrolling without heavy third-party scroll listeners.
-- **Vitest & React Testing Library**: Fast, reliable automated testing with jsdom.
+| Technology | Purpose |
+|---|---|
+| React 18 | Building reusable UI components and managing application state using hooks. |
+| Vite 5 | Development server, project bundling, and production build generation. |
+| Font Awesome | Providing the thumbs-up icon and its associated interactions. |
+| Picsum API | Supplying photograph details and image URLs. |
+| IntersectionObserver | Detecting scroll position and triggering additional data requests. |
+| Vitest | Running automated unit and integration tests. |
+| React Testing Library | Testing React components and user interactions. |
+| jsdom | Providing a simulated browser environment for automated tests. |
